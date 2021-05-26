@@ -18,6 +18,9 @@ RUN apt-get install -y php8.0 libapache2-mod-php8.0 php8.0-common php8.0-gmp php
 # Install utilities
 RUN apt-get install -y git iputils-ping wget unzip curl nano
 
+# Install Apache
+RUN apt-get install -y apache2
+
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
