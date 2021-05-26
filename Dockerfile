@@ -21,6 +21,9 @@ RUN apt-get install -y git iputils-ping wget unzip curl nano
 # Install Apache
 RUN apt-get install -y apache2
 
+# Install MariaDB
+RUN apt-get install -y mariadb-server
+
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
@@ -30,6 +33,7 @@ RUN curl -sS https://getcomposer.org/installer | php \
 EXPOSE 80
 EXPOSE 8080
 EXPOSE 8000
+EXPOSE 3306
 
 # Workdir
 WORKDIR /code/
