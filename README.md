@@ -14,6 +14,7 @@ To download this image you can use the following command:
 ```bash
 docker pull vcgtz/php
 ```
+
 ## Create Container
 With the image downloaded, you can create a container to start to work using the next command:
 ```
@@ -36,4 +37,44 @@ By default the working dir in the container is the folder `/code/` but you insid
 To start to working with the container, yo can use the following command:
 ```
 docker start -i <container_name>
+```
+
+## After running first time
+Configure MySQL
+```bash
+service mysql start
+
+mysql_secure_installation
+```
+
+Enter to MySQL
+```bash
+mysql
+```
+
+And create a new super user
+```sql
+CREATE USER '<user>'@'localhost' IDENTIFIED BY '<password>';
+GRANT ALL PRIVILEGES ON *.* TO '<user>'@'localhost' WITH GRANT OPTION;
+
+CREATE USER '<user>'@'%' IDENTIFIED BY '<password>';
+GRANT ALL PRIVILEGES ON *.* TO '<user>'@'%' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+```
+
+Try to enter using the new super user
+```bash
+mysql -u<user> -p
+```
+
+Edit the config to allow connection from the host machine
+```bash
+nano /etc/mysql/my.cnf
+```
+
+And add at the end
+```
+[mysqld]
+bind-address = 0.0.0.0
 ```
